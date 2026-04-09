@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisah Kita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #a2d2ff;
+            --soft-blue: #eef5ff;
+            --dark-blue: #4a90e2;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: var(--soft-blue);
+            color: #333;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- Music Player Style --- */
+        .music-container {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px solid var(--primary-blue);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--primary-blue), var(--soft-blue));
+        }
+
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5rem;
+            color: var(--white);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+
+        /* --- Counter Together --- */
+        .together-count {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 20px;
+            margin: -50px auto 50px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        /* --- Couple Section --- */
+        .couple-wrapper {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 30px 0 30px 0; /* Bentuk unik */
+            width: 280px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border-bottom: 5px solid var(--primary-blue);
+        }
+
+        .card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--soft-blue);
+        }
+
+        .countdown-label {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        .timer {
+            font-weight: bold;
+            color: var(--dark-blue);
+        }
+
+        /* --- Gallery Section --- */
+        .gallery {
+            padding: 50px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.3s;
+            /* Bentuk lucu bergantian */
+            clip-path: polygon(0% 15%, 100% 0%, 100% 85%, 0% 100%);
+        }
+
+        .gallery img:nth-child(even) {
+            clip-path: polygon(0% 0%, 100% 15%, 85% 100%, 0% 85%);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: var(--dark-blue);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="music-container">
+        <span style="font-size: 0.8rem; font-weight: bold;">Music 🎵</span>
+        <audio id="romanticSong" controls loop>
+            <source src="assets/jatuhcinta.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <section class="hero">
+        <h1 data-aos="zoom-in">Kisah Kita</h1>
+        <p data-aos="fade-up" data-aos-delay="300">Setiap detik berharga bersamamu</p>
+    </section>
+
+    <div class="together-count" data-aos="flip-up">
+        <h3 id="daysTogether">0</h3>
+        <p>Hari Kita Bersama</p>
+    </div>
+
+    <div class="couple-wrapper">
+        <div class="card" data-aos="fade-right">
+            <img src="assets/yusuf.jpeg" alt="Foto Cowok">
+            <h3>Bahrudin Yusup Caruban</h3>
+            <div class="countdown-label">Ulang Tahun Dalam:</div>
+            <div class="timer" id="timer1">Loading...</div>
+        </div>
+
+        <div class="card" data-aos="fade-left">
+            <img src="assets/muria.jpeg" alt="Foto Cewek">
+            <h3>hamdan Muria</h3>
+            <div class="countdown-label">Ulang Tahun Dalam:</div>
+            <div class="timer" id="timer2">Loading...</div>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <img src="assets/foto.jpg" data-aos="fade-up" alt="Kenangan 1">
+        <img src="assets/foto2.jpg" data-aos="fade-up" data-aos-delay="100" alt="Kenangan 2">
+        <img src="assets/foto3.JPG" data-aos="fade-up" data-aos-delay="200" alt="Kenangan 3">
+        <img src="assets/foto4.JPG" data-aos="fade-up" data-aos-delay="300" alt="Kenangan 4">
+        <img src="assets/foto5.JPG" data-aos="fade-up" data-aos-delay="400" alt="Kenangan 5">
+        <img src="assets/foto6.jpg" data-aos="fade-up" data-aos-delay="500" alt="Kenangan 6">
+        <img src="assets/foto7.jpg" data-aos="fade-up" data-aos-delay="600" alt="Kenangan 7">
+        <img src="assets/foto8.JPG" data-aos="fade-up" data-aos-delay="700" alt="Kenangan 8">
+        <img src="assets/foto9.jpg" data-aos="fade-up" data-aos-delay="100" alt="Kenangan 2">
+        <img src="assets/foto10.jpg" data-aos="fade-up" data-aos-delay="200" alt="Kenangan 3">
+        <img src="assets/foto11.jpg" data-aos="fade-up" data-aos-delay="300" alt="Kenangan 4">
+        <img src="assets/foto12.jpg" data-aos="fade-up" data-aos-delay="400" alt="Kenangan 5">
+        <img src="assets/foto14.jpg" data-aos="fade-up" data-aos-delay="500" alt="Kenangan 6">
+        <img src="assets/foto15.jpg" data-aos="fade-up" data-aos-delay="600" alt="Kenangan 7">
+        <img src="assets/foto16.jpg" data-aos="fade-up" data-aos-delay="700" alt="Kenangan 8">
+        <img src="assets/foto17.jpg" data-aos="fade-up" data-aos-delay="800" alt="Kenangan 8">
+        </div>
+
+    <footer>
+        Dibuat dengan ❤️ untuk selamanya
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // --- CONFIGURATION (Ubah di sini) ---
+        const tanggalJadian = "2026-01-18"; // Format: YYYY-MM-DD
+        const ultahCowok = "08-29"; // Format: MM-DD
+        const ultahCewek = "12-07"; // Format: MM-DD
+
+        // Fungsi Hitung Hari Bersama
+        function updateTogetherDays() {
+            const start = new Date(tanggalJadian);
+            const today = new Date();
+            const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
+            document.getElementById('daysTogether').innerText = diff + " Hari";
+        }
+
+        // Fungsi Countdown Ultah
+        function countdownUltah(dateMonth, elementId) {
+            const today = new Date();
+            const year = today.getFullYear();
+            let nextUltah = new Date(`${year}-${dateMonth}`);
+
+            if (today > nextUltah) {
+                nextUltah = new Date(`${year + 1}-${dateMonth}`);
+            }
+
+            const diff = nextUltah - today;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+
+            document.getElementById(elementId).innerText = `${days} Hari ${hours} Jam Lagi`;
+        }
+
+        // Jalankan Fungsi
+        updateTogetherDays();
+        setInterval(() => {
+            countdownUltah(ultahCowok, 'timer1');
+            countdownUltah(ultahCewek, 'timer2');
+        }, 1000);
+    </script>
+</body>
+</html>
